@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentNote - ငွေလွှဲ/ငွေထုတ် ဆိုင်များအတွက် Digital Agent Management</title>
+    <meta name="description" content="AgentNote - မြန်မာ့ ငွေလွှဲ/ငွေထုတ် ဆိုင်များအတွက် OCR receipt scan, auto fee calculation, real-time dashboard ပါဝင်တဲ့ Digital Agent Management App">
+    <meta name="keywords" content="agentnote, money record, mobile money, myanmar, kbzpay, wavepay, money transfer, ledger, receipt scan, ocr">
+    <meta property="og:title" content="AgentNote - Digital Agent Management">
+    <meta property="og:description" content="ငွေလွှဲ/ငွေထုတ် ဆိုင်များအတွက် Digital Agent Management App">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#F3F0FF',
+                            100: '#E5DEFF',
+                            200: '#C4B5FD',
+                            300: '#A78BFA',
+                            400: '#8B5CF6',
+                            500: '#6C3FC5',
+                            600: '#5B21B6',
+                            700: '#4C1D95',
+                            800: '#3B0764',
+                            900: '#2D1B69'
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-inter bg-white text-gray-800 antialiased">
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2">
+                    <img src="images/favicon.png" alt="AgentNote Logo" class="w-10 h-10 md:w-12 md:h-12 rounded-xl object-cover">
+                    <span class="text-xl md:text-2xl font-bold text-primary-500">AgentNote</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-primary-500 transition-colors font-medium">Features</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-primary-500 transition-colors font-medium">How it Works</a>
+                    <a href="#screenshots" class="text-gray-600 hover:text-primary-500 transition-colors font-medium">Screenshots</a>
+                    <a href="#download" class="bg-primary-500 text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-primary-600 transition-all duration-300 shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40">
+                        Download APK
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-primary-50 transition-colors">
+                    <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#features" class="block py-2 text-gray-600 hover:text-primary-500 font-medium">Features</a>
+                <a href="#how-it-works" class="block py-2 text-gray-600 hover:text-primary-500 font-medium">How it Works</a>
+                <a href="#screenshots" class="block py-2 text-gray-600 hover:text-primary-500 font-medium">Screenshots</a>
+                <a href="#download" class="block bg-primary-500 text-white px-6 py-3 rounded-xl font-semibold text-center hover:bg-primary-600 transition-all">
+                    Download APK
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-500"></div>
+
+        <!-- Decorative Elements -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-primary-400/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-primary-300/10 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                        <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 animate-pulse"></span>
+                        <span class="text-white/90 text-sm font-medium">အစမ်းသုံး ရက် ၇ ရက် အခမဲ့</span>
+                    </div>
+
+                    <h1 class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4">
+                        ငွေလွှဲ/ငွေထုတ်
+                        <span class="text-primary-200">ဆိုင်များအတွက်</span>
+                        <br>
+                        <span class="text-primary-200">Digital Agent</span>
+                        <br class="hidden md:block">
+                        Management
+                    </h1>
+
+                    <p class="hero-subtitle text-lg md:text-xl text-white/80 mt-6 mb-8 max-w-xl mx-auto lg:mx-0">
+                        OCR receipt scan, auto fee calculation, real-time dashboard ပါဝင်တဲ့
+                        <br class="hidden md:block">
+                        စာရင်းဇယား တိတိကျကျ ဖြစ်အောင် လုပ်ဆောင်ပေးနိုင်တဲ့ App
+                    </p>
+
+                    <!-- Feature Tags -->
+                    <div class="flex flex-wrap gap-3 mb-8 justify-center lg:justify-start">
+                        <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-white text-sm font-medium">OCR Scan</span>
+                        </div>
+                        <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-white text-sm font-medium">Auto Fee Calc</span>
+                        </div>
+                        <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                            <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-white text-sm font-medium">Dashboard</span>
+                        </div>
+                        <div class="flex items-center bg-yellow-500/20 backdrop-blur-sm rounded-lg px-4 py-2 border border-yellow-400/30">
+                            <svg class="w-5 h-5 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/>
+                            </svg>
+                            <span class="text-white text-sm font-medium">လစဉ် ၅,၀၀၀ ကျပ်</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#download" class="inline-flex items-center justify-center bg-white text-primary-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                            <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/>
+                            </svg>
+                            Download for Android
+                        </a>
+                        <a href="#features" class="inline-flex items-center justify-center border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all duration-300">
+                            ဘာကြောင့် AgentNoteလဲ
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Content - Hero Image -->
+                <div class="relative flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <!-- Phone Mockup -->
+                        <div class="relative w-64 sm:w-72 md:w-80">
+                            <div class="bg-gray-900 rounded-[3rem] p-3 shadow-2xl">
+                                <div class="bg-white rounded-[2.5rem] overflow-hidden">
+                                    <img src="images/hero-screenshot.png" alt="AgentNote Dashboard" class="w-full h-auto">
+                                </div>
+                            </div>
+                            <!-- Floating Cards -->
+                            <div class="absolute -left-8 top-1/4 bg-white rounded-2xl p-4 shadow-xl animate-float">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-500">Cash In</p>
+                                        <p class="text-sm font-bold text-gray-800">322,800 MMK</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute -right-8 bottom-1/4 bg-white rounded-2xl p-4 shadow-xl animate-float-delay">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-500">Cash Out</p>
+                                        <p class="text-sm font-bold text-gray-800">400,000 MMK</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURES SECTION ==================== -->
+    <section id="features" class="py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">Features</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    ဘာကြောင့် <span class="text-primary-500">AgentNote</span>လဲ
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    ငွေလွှဲ/ငွေထုတ် ဆိုင်များအတွက် လိုအပ်တဲ့ feature တွေအားလုံးကို
+                    တစ်နေရာထဲမှာ စုစည်းထားပါတယ်
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1: OCR Scan -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">📱 OCR Receipt Scan</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        KBZPay/WavePay receipt ကို scan လုပ်ပြီး
+                        <span class="text-primary-500 font-semibold">၃ စက္ကန့်</span>အတွင်း
+                        Amount, Provider, Type ကို auto detect ဖြစ်အောင် လုပ်ပေးတယ်
+                    </p>
+                </div>
+
+                <!-- Feature 2: Auto Fee -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">💰 Auto Fee Calculation</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Fee rate တွေကို တစ်ခါတည်း သတ်မှတ်ထားပြီး
+                        တစ်ခုချင်းစီကို
+                        <span class="text-green-600 font-semibold">auto တွက်ပေးတယ်</span>
+                    </p>
+                </div>
+
+                <!-- Feature 3: Dashboard -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">📊 Real-Time Dashboard</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        ဒီနေ့ Cash In/Out, Profit, Balance အားလုံးကို
+                        <span class="text-blue-600 font-semibold">တစ်ချက်နှိပ်ရုံနဲ့</span>
+                        မြင်ရတယ်
+                    </p>
+                </div>
+
+                <!-- Feature 4: Staff Management -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">👥 Staff Management</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        ဝန်ထမ်းတိုင်းရဲ့ performance ကို
+                        <span class="text-purple-600 font-semibold">ခွဲခြမ်းကြည့်လို့ရတယ်</span>
+                        — ဘယ်သူက ဘယ်လောက် ရောင်းတယ်ဆိုတာ သိရတယ်
+                    </p>
+                </div>
+
+                <!-- Feature 5: Daily Reports -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">📋 Daily Reports</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        နေ့စဉ်/အပတ်စဉ်/လစဉ် Report တွေကို
+                        <span class="text-orange-600 font-semibold">auto ဖန်တီးပေးတယ်</span>
+                    </p>
+                </div>
+
+                <!-- Feature 6: Secure -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">🔒 Secure Data</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        သင့်ဒေတာကို encryption နဲ့
+                        <span class="text-red-600 font-semibold">ဘေးကင်းအောင်</span>
+                        ကာကွယ်ထားတယ်
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section id="how-it-works" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">How it Works</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    ဘယ်လို <span class="text-primary-500">အလုပ်လုပ်</span>လဲ
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    ရိုးရှင်းတဲ့ အဆင့် ၃ ဆင့်နဲ့ စတင်အသုံးပြုလို့ရပါပြီ
+                </p>
+            </div>
+
+            <!-- Steps -->
+            <div class="grid md:grid-cols-3 gap-8 relative">
+                <!-- Connector Line (Desktop) -->
+                <div class="hidden md:block absolute top-24 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-primary-200 via-primary-400 to-primary-200"></div>
+
+                <!-- Step 1 -->
+                <div class="relative text-center">
+                    <div class="w-20 h-20 bg-primary-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary-500/30 relative z-10">
+                        <span class="text-3xl font-bold text-white">၁</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Download App</h3>
+                    <p class="text-gray-600 max-w-xs mx-auto">
+                        AgentNote App ကို download ပြီး install လုပ်ပါ
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative text-center">
+                    <div class="w-20 h-20 bg-primary-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary-500/30 relative z-10">
+                        <span class="text-3xl font-bold text-white">၂</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Scan Receipt</h3>
+                    <p class="text-gray-600 max-w-xs mx-auto">
+                        KBZPay/WavePay receipt ကို scan လုပ်ပါ
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative text-center">
+                    <div class="w-20 h-20 bg-primary-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary-500/30 relative z-10">
+                        <span class="text-3xl font-bold text-white">၃</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Track Business</h3>
+                    <p class="text-gray-600 max-w-xs mx-auto">
+                        Dashboard ထဲမှာ သင့်လုပ်ငန်းကို ကြည့်ပါ
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PRICING SECTION ==================== -->
+    <section class="py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">Pricing</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    ဘယ်လောက် <span class="text-primary-500">ကုန်ကျ</span>မလဲ
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    ရိုးရှင်းတဲ့ စည်းကမ်း — အစမ်းပြီးမှ ဆုံးဖြတ်ပါ
+                </p>
+            </div>
+
+            <!-- Pricing Card -->
+            <div class="max-w-lg mx-auto">
+                <div class="bg-white rounded-3xl p-8 md:p-10 shadow-xl border-2 border-primary-500 relative overflow-hidden">
+                    <!-- Popular Badge -->
+                    <div class="absolute top-0 right-0 bg-primary-500 text-white px-4 py-1 rounded-bl-xl text-sm font-semibold">
+                        Popular
+                    </div>
+
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">AgentNote</h3>
+                        <p class="text-gray-600">Digital Agent Management</p>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="text-center mb-8">
+                        <div class="flex items-baseline justify-center">
+                            <span class="text-5xl md:text-6xl font-bold text-primary-500">၅,၀၀၀</span>
+                            <span class="text-xl text-gray-600 ml-2">ကျပ်/လ</span>
+                        </div>
+                        <p class="text-gray-500 mt-2">အစမ်းသုံး ရက် ၇ ရက် အခမဲ့</p>
+                    </div>
+
+                    <!-- Features List -->
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">OCR Receipt Scan</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">Auto Fee Calculation</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">Real-Time Dashboard</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">Staff Management</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">Daily/Weekly/Monthly Reports</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">Floating Button</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">Secure Data Encryption</span>
+                        </li>
+                    </ul>
+
+                    <!-- CTA Button -->
+                    <a href="#download" class="block w-full bg-primary-500 text-white text-center py-4 rounded-xl font-bold text-lg hover:bg-primary-600 transition-all duration-300 shadow-lg shadow-primary-500/30">
+                        အခုပဲ စမ်းသုံးကြည့်ပါ
+                    </a>
+
+                    <p class="text-center text-gray-500 text-sm mt-4">
+                        ရက် ၇ ရက် အခမဲ့ စမ်းသုံးပြီးနောက် လစဉ် ၅,၀၀၀ ကျပ်
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SCREENSHOTS SECTION ==================== -->
+    <section id="screenshots" class="py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="inline-block bg-primary-100 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">Screenshots</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    App <span class="text-primary-500">ဘယ်လို</span> ပုံစံရှိလဲ
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    AgentNote ရဲ့ UI design ကို ကြည့်ပါ
+                </p>
+            </div>
+
+            <!-- Screenshots Carousel -->
+            <div class="relative">
+                <div id="screenshot-carousel" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6 pb-8">
+                    <!-- Screenshot 1 -->
+                    <div class="flex-none w-72 sm:w-80 snap-center">
+                        <div class="bg-white rounded-3xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="bg-gray-900 rounded-2xl p-2">
+                                <img src="images/screenshot-1.png" alt="Dashboard" class="w-full h-auto rounded-xl">
+                            </div>
+                            <div class="text-center mt-4">
+                                <h4 class="font-bold text-gray-900">Dashboard</h4>
+                                <p class="text-sm text-gray-500">Real-time overview</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Screenshot 2 -->
+                    <div class="flex-none w-72 sm:w-80 snap-center">
+                        <div class="bg-white rounded-3xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="bg-gray-900 rounded-2xl p-2">
+                                <img src="images/screenshot-2.png" alt="Transaction" class="w-full h-auto rounded-xl">
+                            </div>
+                            <div class="text-center mt-4">
+                                <h4 class="font-bold text-gray-900">Transaction</h4>
+                                <p class="text-sm text-gray-500">Quick entry</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Screenshot 3 -->
+                    <div class="flex-none w-72 sm:w-80 snap-center">
+                        <div class="bg-white rounded-3xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="bg-gray-900 rounded-2xl p-2">
+                                <img src="images/screenshot-3.png" alt="Settings" class="w-full h-auto rounded-xl">
+                            </div>
+                            <div class="text-center mt-4">
+                                <h4 class="font-bold text-gray-900">Settings</h4>
+                                <p class="text-sm text-gray-500">Easy configuration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Navigation -->
+                <div class="flex justify-center mt-8 space-x-3">
+                    <button id="carousel-prev" class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-primary-50 transition-colors border border-gray-100">
+                        <svg class="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button id="carousel-next" class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-primary-50 transition-colors border border-gray-100">
+                        <svg class="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DOWNLOAD CTA ==================== -->
+    <section id="download" class="py-16 md:py-24 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-500 relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 left-0 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary-300/10 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12">
+                <div class="inline-flex items-center bg-yellow-500/20 rounded-full px-4 py-2 mb-6">
+                    <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 animate-pulse"></span>
+                    <span class="text-yellow-300 text-sm font-medium">အစမ်းသုံး ရက် ၇ ရက် အခမဲ့</span>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                    ယခုပဲ <span class="text-primary-200">စမ်းသုံးကြည့်ပါ</span>
+                </h2>
+
+                <p class="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+                    ငွေလွှဲ/ငွေထုတ် ဆိုင်တွေအတွက်
+                    Digital Agent Management App
+                </p>
+
+                <!-- Pricing Box -->
+                <div class="bg-white/10 rounded-2xl p-6 mb-8 max-w-md mx-auto">
+                    <div class="text-center mb-4">
+                        <span class="text-white/60 text-sm">လစဉ်ကြေး</span>
+                        <div class="flex items-baseline justify-center mt-2">
+                            <span class="text-4xl md:text-5xl font-bold text-white">၅,၀၀၀</span>
+                            <span class="text-xl text-white/80 ml-2">ကျပ်/လ</span>
+                        </div>
+                    </div>
+                    <div class="border-t border-white/20 pt-4">
+                        <div class="flex items-center text-white/80 text-sm mb-2">
+                            <svg class="w-4 h-4 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            အစမ်းသုံး ရက် ၇ ရက် အခမဲ့
+                        </div>
+                        <div class="flex items-center text-white/80 text-sm mb-2">
+                            <svg class="w-4 h-4 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            အကန့်အသတ်မရှိ သုံးနိုင်
+                        </div>
+                        <div class="flex items-center text-white/80 text-sm">
+                            <svg class="w-4 h-4 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Credit card မလို
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="flex flex-wrap justify-center gap-4 mb-10">
+                    <div class="flex items-center bg-white/10 rounded-lg px-4 py-2">
+                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-white text-sm font-medium">ရက် ၇ ရက် အခမဲ့</span>
+                    </div>
+                    <div class="flex items-center bg-white/10 rounded-lg px-4 py-2">
+                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-white text-sm font-medium">လစဉ် ၅,၀၀၀ ကျပ်ပဲ</span>
+                    </div>
+                    <div class="flex items-center bg-white/10 rounded-lg px-4 py-2">
+                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-white text-sm font-medium">Setup in 5 min</span>
+                    </div>
+                </div>
+
+                <!-- Download Button -->
+                <a href="downloads/app-release.apk" class="inline-flex items-center justify-center bg-white text-primary-600 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-primary-50 transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1">
+                    <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/>
+                    </svg>
+                    AgentNote Download
+                </a>
+
+                <p class="text-white/60 text-sm mt-6">
+                    Version 1.0.0 | 94.2 MB | Android 7.0+ | အစမ်းသုံး ရက် ၇ ရက်
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STATS SECTION ==================== -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl md:text-4xl font-bold text-primary-500 mb-2">94.2 MB</div>
+                    <div class="text-gray-600">App Size</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-bold text-primary-500 mb-2">v1.0.0</div>
+                    <div class="text-gray-600">Version</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-bold text-primary-500 mb-2">Android 7+</div>
+                    <div class="text-gray-600">Required</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-bold text-yellow-500 mb-2">၅,၀၀၀</div>
+                    <div class="text-gray-600">ကျပ်/လ (Monthly)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Logo & Description -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="images/favicon.png" alt="AgentNote Logo" class="w-10 h-10 rounded-xl object-cover">
+                        <span class="text-xl font-bold">AgentNote</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        ငွေလွှဲ/ငွေထုတ် ဆိုင်များအတွက်
+                        Digital Agent Management App
+                    </p>
+                    <div class="bg-gray-800 rounded-lg p-3 inline-block">
+                        <span class="text-gray-400 text-xs">လစဉ်ကြေး: </span>
+                        <span class="text-white font-bold">၅,၀၀၀ ကျပ်</span>
+                        <span class="text-gray-400 text-xs"> | အစမ်း: ရက် ၇ ရက်</span>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-semibold mb-4">Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors text-sm">Features</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition-colors text-sm">How it Works</a></li>
+                        <li><a href="#screenshots" class="text-gray-400 hover:text-white transition-colors text-sm">Screenshots</a></li>
+                        <li><a href="#download" class="text-gray-400 hover:text-white transition-colors text-sm">Download</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="https://t.me/aung_k_min" target="_blank" class="flex items-center text-gray-400 text-sm hover:text-white transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-primary-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                </svg>
+                                Telegram
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/share/1BmqrUYShF/" target="_blank" class="flex items-center text-gray-400 text-sm hover:text-white transition-colors">
+                                <svg class="w-5 h-5 mr-3 text-primary-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                                Facebook
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2026 AgentNote. All rights reserved.
+                </p>
+                <p class="text-gray-500 text-sm">
+                    Made with ❤️ in Myanmar
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="js/main.js"></script>
+</body>
+</html>
