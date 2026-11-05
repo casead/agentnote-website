@@ -38,10 +38,13 @@
     <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
                 <a href="#" class="flex items-center space-x-2">
                     <img src="images/favicon.png" alt="AgentNote Logo" class="w-10 h-10 md:w-12 md:h-12 rounded-xl object-cover">
                     <span class="text-xl md:text-2xl font-bold text-primary-500">AgentNote</span>
                 </a>
+
+                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#features" class="text-gray-600 hover:text-primary-500 transition-colors font-medium">Features</a>
                     <a href="#how-it-works" class="text-gray-600 hover:text-primary-500 transition-colors font-medium">How it Works</a>
@@ -50,6 +53,8 @@
                         Download APK
                     </a>
                 </div>
+
+                <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-primary-50 transition-colors">
                     <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -57,6 +62,8 @@
                 </button>
             </div>
         </div>
+
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
             <div class="px-4 py-4 space-y-3">
                 <a href="#features" class="block py-2 text-gray-600 hover:text-primary-500 font-medium">Features</a>
@@ -70,7 +77,8 @@
     </nav>
 
     <!-- ==================== HERO SECTION ==================== -->
-    <section class="relative min-h-screen flex items-center pt-10 overflow-hidden">
+    <!-- pt-10 နေရာမှာ pt-20 ပြောင်းထားပါတယ် (Navbar က ဖုံးမနေအောင်) -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-500"></div>
         <div class="absolute top-20 left-10 w-72 h-72 bg-primary-400/20 rounded-full blur-3xl"></div>
         <div class="absolute bottom-20 right-10 w-96 h-96 bg-primary-300/10 rounded-full blur-3xl"></div>
@@ -319,7 +327,6 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                     ဘယ်လောက် <span class="text-primary-500">ကုန်ကျ</span>မလဲ
                 </h2>
-                
             </div>
 
             <div class="max-w-2xl mx-auto">
@@ -344,7 +351,7 @@
                     <!-- 🔥 Promo Banner (Auto Show/Hide) -->
                     <div id="promoBanner" class="bg-red-50 border-2 border-red-300 rounded-2xl px-5 py-4 mb-6 text-center hidden">
                         <p class="text-red-600 font-bold text-lg">
-                            🔥 နို၀င်ဘာ ၆ ရက် မှ ၁၅ ရက် အထိ အထူးလျှော့စျေး
+                            🔥 နို၀င်ဘာ ၅ ရက် မှ ၁၅ ရက် အထိ အထူးလျှော့စျေး
                         </p>
                         <p class="text-gray-700 font-semibold text-xl mt-1">
                             ၁ လ ဝယ်ရင် <span class="text-primary-600 text-2xl">၁၀,၅၀၀</span> ကျပ် (၃၀% လျှော့)
