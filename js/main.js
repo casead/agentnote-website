@@ -7,19 +7,13 @@ const carouselPrev = document.getElementById('carousel-prev');
 const carouselNext = document.getElementById('carousel-next');
 
 // ==================== NAVBAR SCROLL EFFECT ====================
-let lastScroll = 0;
-
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-
-    // Add shadow on scroll
     if (currentScroll > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
-
-    lastScroll = currentScroll;
 });
 
 // ==================== MOBILE MENU TOGGLE ====================
@@ -33,7 +27,6 @@ mobileMenuBtn.addEventListener('click', () => {
     }
 });
 
-// Close mobile menu when clicking a link
 document.querySelectorAll('#mobile-menu a').forEach(link => {
     link.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
@@ -48,33 +41,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
 
 // ==================== SCREENSHOT CAROUSEL ====================
 const carouselItems = screenshotCarousel.querySelectorAll('.snap-center');
-const itemWidth = carouselItems[0]?.offsetWidth + 24 || 320; // width + gap
+const itemWidth = carouselItems[0]?.offsetWidth + 24 || 320;
 
 carouselNext.addEventListener('click', () => {
-    screenshotCarousel.scrollBy({
-        left: itemWidth,
-        behavior: 'smooth'
-    });
+    screenshotCarousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
 });
 
 carouselPrev.addEventListener('click', () => {
-    screenshotCarousel.scrollBy({
-        left: -itemWidth,
-        behavior: 'smooth'
-    });
+    screenshotCarousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
 });
 
-// Touch/Swipe support for carousel
 let startX, scrollLeft, isDragging = false;
 
 screenshotCarousel.addEventListener('mousedown', (e) => {
@@ -102,49 +85,17 @@ screenshotCarousel.addEventListener('mousemove', (e) => {
     screenshotCarousel.scrollLeft = scrollLeft - walk;
 });
 
-// Set cursor on carousel
 screenshotCarousel.style.cursor = 'grab';
 
 // ==================== SCROLL REVEAL ANIMATION ====================
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
-
+const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('active');
     });
 }, observerOptions);
 
-// Observe elements for reveal animation
-document.querySelectorAll('.reveal').forEach(el => {
-    observer.observe(el);
-});
-
-// ==================== FEATURE CARDS ANIMATION ====================
-const featureCards = document.querySelectorAll('.feature-card');
-
-const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
-        }
-    });
-}, { threshold: 0.1 });
-
-featureCards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'all 0.6s ease';
-    cardObserver.observe(card);
-});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ==================== LIGHTBOX ====================
 function createLightbox() {
@@ -160,15 +111,12 @@ function createLightbox() {
     `;
     document.body.appendChild(lightbox);
 
-    const closeBtn = lightbox.querySelector('.lightbox-close');
-    closeBtn.addEventListener('click', () => {
+    lightbox.querySelector('.lightbox-close').addEventListener('click', () => {
         lightbox.classList.remove('active');
     });
 
     lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.classList.remove('active');
-        }
+        if (e.target === lightbox) lightbox.classList.remove('active');
     });
 
     return lightbox;
@@ -176,7 +124,6 @@ function createLightbox() {
 
 const lightbox = createLightbox();
 
-// Add click event to screenshot images
 document.querySelectorAll('#screenshot-carousel img').forEach(img => {
     img.addEventListener('click', () => {
         const lightboxImg = lightbox.querySelector('img');
@@ -186,94 +133,9 @@ document.querySelectorAll('#screenshot-carousel img').forEach(img => {
     });
 });
 
-// Close lightbox with Escape key
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        lightbox.classList.remove('active');
-    }
+    if (e.key === 'Escape') lightbox.classList.remove('active');
 });
-
-// ==================== BUTTON HOVER EFFECT ====================
-document.querySelectorAll('.btn-primary, a[href="#download"]').forEach(btn => {
-    btn.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-2px)';
-    });
-    btn.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-    });
-});
-
-// ==================== STATS COUNTER ANIMATION ====================
-function animateCounter(element, target, duration = 2000) {
-    let start = 0;
-    const increment = target / (duration / 16);
-
-    function updateCounter() {
-        start += increment;
-        if (start < target) {
-            element.textContent = Math.floor(start);
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = target;
-        }
-    }
-
-    updateCounter();
-}
-
-// Observe stats section
-const statsSection = document.querySelector('.grid.grid-cols-2');
-if (statsSection) {
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add animation class if needed
-                statsObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    statsObserver.observe(statsSection);
-}
-
-// ==================== DOWNLOAD BUTTON RIPPLE EFFECT ====================
-document.querySelectorAll('a[href="downloads/app-release.apk"]').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        ripple.style.cssText = `
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 50%;
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            pointer-events: none;
-        `;
-
-        const rect = this.getBoundingClientRect();
-        ripple.style.left = (e.clientX - rect.left - 10) + 'px';
-        ripple.style.top = (e.clientY - rect.top - 10) + 'px';
-
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-
-        setTimeout(() => ripple.remove(), 600);
-    });
-});
-
-// Add ripple animation keyframes
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes ripple {
-        to {
-            transform: scale(40);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
 
 // ==================== BACK TO TOP BUTTON ====================
 const backToTopBtn = document.createElement('button');
@@ -296,19 +158,121 @@ window.addEventListener('scroll', () => {
 });
 
 backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 // ==================== LOADING SCREEN ====================
 window.addEventListener('load', () => {
     const loading = document.querySelector('.loading');
-    if (loading) {
-        loading.classList.add('hidden');
-    }
+    if (loading) loading.classList.add('hidden');
 });
+
+// ==================== 🔥 AUTO DATE & PRICING SCRIPT ====================
+(function () {
+    // ===== ဤနေရာတွင် ရက်စွဲများကို ပြင်နိုင်သည် =====
+    const PROMO_START = new Date('2026-11-06T00:00:00+06:30'); // နိုဝင်ဘာ ၆ ရက်
+    const PROMO_END   = new Date('2026-11-15T23:59:59+06:30'); // နိုဝင်ဘာ ၁၅ ရက် (အဆုံး)
+    const BASE_PRICE  = 15000; // ၁ လ ပုံမှန်ဈေး
+
+    // ပရိုမိုးကာလ အတွင်း လျှော့စျေး (%)
+    const PROMO_DISCOUNTS = {
+        1: 30, 2: 32, 3: 35, 6: 40, 12: 45, 0: 0
+    };
+
+    // ပရိုမိုးကာလ ကျော်သွားပါက လျှော့စျေး (%)
+    const NORMAL_DISCOUNTS = {
+        1: 0, 2: 5, 3: 8, 6: 12, 12: 15, 0: 0
+    };
+
+    const LIFETIME_PRICE = 500000; // Life Time ဈေး
+
+    // ===== ယခု ပရိုမိုးကာလ အတွင်း ရှိ/မရှိ စစ်ဆေး =====
+    const now = new Date();
+    const isPromo = now >= PROMO_START && now <= PROMO_END;
+
+    // ===== Package Data ဖန်တီး =====
+    function buildPackages() {
+        const disc = isPromo ? PROMO_DISCOUNTS : NORMAL_DISCOUNTS;
+        const list = [
+            { months: 1, label: '၁ လ' },
+            { months: 2, label: '၂ လ' },
+            { months: 3, label: '၃ လ' },
+            { months: 6, label: '၆ လ' },
+            { months: 12, label: '၁၂ လ' }
+        ];
+
+        return list.map(item => {
+            const original = BASE_PRICE * item.months;
+            const pct = disc[item.months] || 0;
+            const price = Math.round(original * (100 - pct) / 100);
+            return { ...item, original, pct, price, isLifetime: false };
+        });
+    }
+
+    // ===== Package Card HTML =====
+    function packageCard(pkg) {
+        if (pkg.isLifetime) {
+            return `
+                <div class="border-2 border-yellow-400 bg-yellow-50 rounded-xl p-4 hover:border-yellow-500 transition-all">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-gray-800">Life Time</span>
+                        <span class="bg-yellow-400 text-gray-900 text-xs px-2 py-1 rounded-full font-semibold">BEST</span>
+                    </div>
+                    <p class="text-primary-600 font-bold text-lg mt-1">${LIFETIME_PRICE.toLocaleString('en-US')} ကျပ်</p>
+                    <p class="text-gray-400 text-xs">တစ်သက်တာ အသုံးပြုနိုင်</p>
+                </div>
+            `;
+        }
+        const pctBadge = pkg.pct > 0
+            ? `<span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-semibold">-${pkg.pct}%</span>`
+            : `<span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded-full font-semibold">0%</span>`;
+        const originalStrike = pkg.pct > 0
+            ? `<p class="text-gray-400 text-xs line-through">${pkg.original.toLocaleString('en-US')} ကျပ်</p>`
+            : ``;
+        return `
+            <div class="border-2 border-gray-200 rounded-xl p-4 hover:border-primary-400 transition-all">
+                <div class="flex justify-between items-center">
+                    <span class="font-bold text-gray-800">${pkg.label}</span>
+                    ${pctBadge}
+                </div>
+                <p class="text-primary-600 font-bold text-lg mt-1">${pkg.price.toLocaleString('en-US')} ကျပ်</p>
+                ${originalStrike}
+            </div>
+        `;
+    }
+
+    // ===== Render Package Grid =====
+    function renderPackages() {
+        const grid = document.getElementById('packageGrid');
+        if (!grid) return;
+        const packages = buildPackages();
+        let html = packages.map(packageCard).join('');
+        html += packageCard({ isLifetime: true });
+        grid.innerHTML = html;
+    }
+
+    // ===== Promo Banner ပြသ/ဖျောက် =====
+    function togglePromoElements() {
+        const promoBanner = document.getElementById('promoBanner');
+        const downloadPromoBox = document.getElementById('downloadPromoBox');
+        if (isPromo) {
+            if (promoBanner) promoBanner.classList.remove('hidden');
+            if (downloadPromoBox) downloadPromoBox.classList.remove('hidden');
+        } else {
+            if (promoBanner) promoBanner.classList.add('hidden');
+            if (downloadPromoBox) downloadPromoBox.classList.add('hidden');
+        }
+    }
+
+    // ===== Run =====
+    renderPackages();
+    togglePromoElements();
+
+    // Debug
+    console.log('%c AgentNote Pricing Auto-Check', 'color:#6C3FC5;font-weight:bold;');
+    console.log('ယခုရက်စွဲ:', now.toString());
+    console.log('ပရိုမိုးကာလအတွင်း:', isPromo ? '✅ ရှိ' : '❌ မရှိ');
+})();
 
 // ==================== CONSOLE LOG ====================
 console.log('%c AgentNote 🐱', 'color: #6C3FC5; font-size: 24px; font-weight: bold;');

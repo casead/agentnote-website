@@ -14,6 +14,11 @@ body {
     overflow-x: hidden;
 }
 
+/* ==================== UTILITY ==================== */
+.hidden {
+    display: none !important;
+}
+
 /* ==================== SCROLLBAR ==================== */
 ::-webkit-scrollbar {
     width: 8px;
@@ -46,85 +51,45 @@ body {
 
 /* ==================== ANIMATIONS ==================== */
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
 }
 
 @keyframes float-delay {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes pulse-glow {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(108, 63, 197, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 40px rgba(108, 63, 197, 0.6);
-    }
+    0%, 100% { box-shadow: 0 0 20px rgba(108, 63, 197, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(108, 63, 197, 0.6); }
 }
 
-.animate-float {
-    animation: float 6s ease-in-out infinite;
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }
 
-.animate-float-delay {
-    animation: float-delay 6s ease-in-out infinite;
-    animation-delay: 2s;
-}
-
-.animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-fade-in-left {
-    animation: fadeInLeft 0.8s ease-out forwards;
-}
-
-.animate-fade-in-right {
-    animation: fadeInRight 0.8s ease-out forwards;
-}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delay { animation: float-delay 6s ease-in-out infinite; animation-delay: 2s; }
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-fade-in-left { animation: fadeInLeft 0.8s ease-out forwards; }
+.animate-fade-in-right { animation: fadeInRight 0.8s ease-out forwards; }
 
 /* ==================== NAVBAR ==================== */
 #navbar {
@@ -150,7 +115,7 @@ body {
 }
 
 .hero-title {
-    line-height: 1.3;
+    line-height: 1.5;
     letter-spacing: -0.02em;
 }
 
@@ -184,6 +149,23 @@ body {
 .feature-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== PRICING PACKAGE CARDS ==================== */
+#packageGrid > div {
+    animation: fadeInScale 0.4s ease-out forwards;
+    transition: all 0.3s ease;
+}
+
+#packageGrid > div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(108, 63, 197, 0.15);
+}
+
+/* Promo Banner Animation */
+#promoBanner:not(.hidden),
+#downloadPromoBox:not(.hidden) {
+    animation: fadeInScale 0.5s ease-out forwards;
 }
 
 /* ==================== RESPONSIVE ==================== */
@@ -284,9 +266,7 @@ body {
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
 /* ==================== SCROLL ANIMATIONS ==================== */
