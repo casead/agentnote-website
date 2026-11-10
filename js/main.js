@@ -176,8 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ==================== 🔥 AUTO DATE & PRICING SCRIPT ====================
     (function () {
-        const PROMO_START = new Date('2026-11-05T00:00:00+06:30');
-        const PROMO_END   = new Date('2026-11-15T23:59:59+06:30');
+        const PROMO_START = new Date('2026-11-10T00:00:00+06:30');
+        const PROMO_END   = new Date('2026-11-25T23:59:59+06:30');
         const BASE_PRICE  = 15000;
 
         const PROMO_DISCOUNTS = { 1: 30, 2: 32, 3: 35, 6: 40, 12: 45, 0: 0 };
